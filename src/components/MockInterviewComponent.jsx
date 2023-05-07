@@ -13,7 +13,7 @@ const MockInterviewComponent = ({ previousConvo, firstMessage }) => {
         document.getElementById("chatbox").innerHTML += `<p class='chattext'>You: ${message}</p>`;
         sendInput(message, previousMessages).then((res) => {
             setPreviousMessages(res[1]);
-            document.getElementById("chatbox").innerHTML += `<p class='chattext'>GPT: ${res[0]}</p>`
+            document.getElementById("chatbox").innerHTML += `<p class='chattext'>Mentor: ${res[0]}</p>`
             setMessage("");
         })
         // mockInterviewConversation(message, previousConvo).then((res) => {

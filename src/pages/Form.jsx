@@ -4,6 +4,7 @@ import JDComponent from '../components/JDComponent';
 import { initial_prompt, compareResumeToJD } from '../../utilities/openai'
 import ComparisonComponent from '../components/ComparisonComponent';
 import MockInterviewComponent from '../components/MockInterviewComponent';
+import LoginComponent from '../components/LoginComponent'
 
 export default class Form extends Component {
 
@@ -13,6 +14,7 @@ export default class Form extends Component {
     jobDescriptionString: "",
     prompt: initial_prompt,
     res: "",
+    user: null
   };
 
   // goes back to the previous step
@@ -66,6 +68,10 @@ export default class Form extends Component {
     this.setState({ res: resu });
   }
 
+  setUser = (user) => {
+    this.setState({user: user})
+  }
+
   render() {
     const { step } = this.state;
     const {
@@ -85,6 +91,13 @@ export default class Form extends Component {
     switch (step) {
       case 1:
         return (
+          <LoginComponent
+          nextStep = {this.nextStep}
+          setUser = {this.setUser}
+          />
+        )
+      case 2:
+        return (
           <JDComponent
             previousStep={this.previousStep}
             nextStep={this.nextStep}
@@ -95,7 +108,7 @@ export default class Form extends Component {
             values={values}
           />
         );
-      case 2:
+      case 3:
         return (
           <MockInterviewComponent
             previousConvo={values.prompt}
