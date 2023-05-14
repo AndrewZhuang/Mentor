@@ -27,7 +27,7 @@ const MockInterviewComponent = ({ previousConvo, firstMessage }) => {
     return (
         <div>
             <div class="container chatwindow" id="chatbox">
-                <p class='chattext'>GPT: {firstMessage}</p>
+                <p class='chattext'>Mentor: {firstMessage}</p>
                 {/* {previousConvo.map((messageObject) => {
                     messageObject.role == "user"
                         ? <p className="userMessage" key={messageObject.content}>{messageObject.content}</p>
