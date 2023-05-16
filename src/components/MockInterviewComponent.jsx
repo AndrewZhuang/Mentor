@@ -34,8 +34,13 @@ const MockInterviewComponent = ({ previousConvo, firstMessage }) => {
                         : <p className="aiMessage" key={messageObject.content}>{messageObject.content}</p>
                 })} */}
             </div>
-            <div class="input">
-                <div>
+            <div class="input" style={{
+                position:"relative"
+            }}>
+                <div class="input-holder" style={{
+                    position:"absolute",
+                    right:"0"
+                }}>
                     <TextField
                         type="text"
                         placeholder="Enter questions or responses here"
@@ -45,8 +50,8 @@ const MockInterviewComponent = ({ previousConvo, firstMessage }) => {
                             style: {
                                 background: "white",
                                 fontSize: "0.8rem",
-                                width: "90%",
-                                marginLeft: "5%",
+                                width: "625px",
+                                marginRight: "16px",
                                 display: "flex",
                                 alignText: "center",
                                 borderRadius: "8px",
