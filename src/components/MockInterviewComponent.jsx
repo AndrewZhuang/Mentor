@@ -24,6 +24,18 @@ const MockInterviewComponent = ({ previousConvo, firstMessage }) => {
 
     }
 
+    const Enter = (e) => {
+        if (e.key == "Enter") {
+            // does same thing as handleClick, but couldn't call it explicitly
+            document.getElementById("chatbox").innerHTML += `<p class='chattext'>You: ${message}</p>`;
+            sendInput(message, previousMessages).then((res) => {
+                setPreviousMessages(res[1]);
+                document.getElementById("chatbox").innerHTML += `<p class='chattext'>Mentor: ${res[0]}</p>`
+                setMessage("");
+            })
+        }
+    }
+
     return (
         <div>
             <div class="container chatwindow" id="chatbox">
@@ -40,7 +52,7 @@ const MockInterviewComponent = ({ previousConvo, firstMessage }) => {
                 <div class="input-holder" style={{
                     position:"absolute",
                     right:"0"
-                }}>
+                }}  onKeyDown={Enter}>
                     <TextField
                         type="text"
                         placeholder="Enter questions or responses here"

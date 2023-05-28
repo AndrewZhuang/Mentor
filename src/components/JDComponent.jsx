@@ -20,10 +20,24 @@ const JDComponent = ({ previousStep, nextStep, handleChange, setJobDescriptionSt
     })
   };
 
+  const Enter = (e) => {
+    if (e.key == "Enter") {
+      // for some reason couldn't call Continue explicitly, so copied the Continue code
+      e.preventDefault();
+      document.getElementById("comparingText").innerHTML = "Processing Job Description..."
+      checkQualifications(values.jobDescriptionString, values.prompt).then((res) => {
+        setPrompt(res[1]);
+        setRes(res[0]);
+        console.log(res[0]);
+        nextStep();
+      })
+    }
+  };
+
   return (
     <div class="container text-center">
       <h2 id="comparingText"></h2>
-      <div class="row justify-content-center">
+      <div class="row justify-content-center" onKeyDown={Enter}>
         <TextField
           type="text"
           placeholder="Enter Job Description Here"
