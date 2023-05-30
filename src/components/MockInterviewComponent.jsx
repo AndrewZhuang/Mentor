@@ -6,16 +6,11 @@ import { mockInterviewConversation, sendInput } from "../../utilities/openai"
 import "./MockInterviewComponent.css"
 
 
-function activateLink(message){
-    // from jada: the app freezes when I try to call helper functions, so i just put the code in directly where necessary.
-    // I'm not superr familiar with JavaScript so if someone else would want to figure that issue out feel free
-    link_regex = /https:\/\/\S+/;  
-    return message.replace(link_regex, "<a href=$& target=_blank>$&</a>");
-}
-
 const MockInterviewComponent = ({ previousConvo, firstMessage }) => {
     const [message, setMessage] = React.useState("");
     const [previousMessages, setPreviousMessages] = React.useState(previousConvo);
+    const link_regex = /https:\/\/\S+/g;
+    const link_replacement = "<a href=$& target=_blank>$&</a>"
 
     const handleClick = () => {
         document.getElementById("chatbox").innerHTML += `<p class='chattext'>You: ${message}</p>`;
@@ -23,7 +18,7 @@ const MockInterviewComponent = ({ previousConvo, firstMessage }) => {
             setPreviousMessages(res[1]);
             // document.getElementById("chatbox").innerHTML += `<p class='chattext'>Mentor: ${res[0]}</p>`
             // same idea as activateLink helper, couldn't call it explicitly
-            document.getElementById("chatbox").innerHTML += `<p class='chattext'>Mentor: ${res[0].replace(/https:\/\/\S+/, "<a href=$& target=_blank>$&</a>")}</p>`
+            document.getElementById("chatbox").innerHTML += `<p class='chattext'>Mentor: ${res[0].replaceAll(link_regex, link_replacement)}</p>`
             setMessage("");
         })
         // mockInterviewConversation(message, previousConvo).then((res) => {
@@ -42,7 +37,7 @@ const MockInterviewComponent = ({ previousConvo, firstMessage }) => {
                 setPreviousMessages(res[1]);
                 // document.getElementById("chatbox").innerHTML += `<p class='chattext'>Mentor: ${res[0]}</p>`
                 // same idea as activateLink helper, couldn't call it explicitly
-                document.getElementById("chatbox").innerHTML += `<p class='chattext'>Mentor: ${res[0].replace(/https:\/\/\S+/, "<a href=$& target=_blank>$&</a>")}</p>`
+                document.getElementById("chatbox").innerHTML += `<p class='chattext'>Mentor: ${res[0].replaceAll(link_regex, link_replacement)}</p>`
                 setMessage("");
             })
         }
